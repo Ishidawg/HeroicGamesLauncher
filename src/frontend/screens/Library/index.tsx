@@ -613,8 +613,15 @@ export default React.memo(function Library(): JSX.Element {
         ? -gameA.localeCompare(gameB)
         : gameA.localeCompare(gameB)
     })
-    const installed = library.filter((game) => game?.is_installed)
-    const notInstalled = library.filter(
+    const favoriteAppNames = favouriteGamesList.map((fav) => fav.appName)
+    const favorite = library.filter((game) =>
+      favoriteAppNames.includes(game.app_name)
+    )
+    const nonFavorite = library.filter(
+      (game) => !favoriteAppNames.includes(game.app_name)
+    )
+    const installed = nonFavorite.filter((game) => game?.is_installed)
+    const notInstalled = nonFavorite.filter(
       (game) => !game?.is_installed && !installing.includes(game?.app_name)
     )
     const installingGames = library.filter(
@@ -622,8 +629,8 @@ export default React.memo(function Library(): JSX.Element {
     )
 
     library = sortInstalled
-      ? [...installed, ...installingGames, ...notInstalled]
-      : library
+      ? [...favorite, ...installed, ...installingGames, ...notInstalled]
+      : [...favorite, ...nonFavorite]
 
     return [...library]
   }, [
@@ -631,7 +638,8 @@ export default React.memo(function Library(): JSX.Element {
     alphabetFilterLetter,
     sortDescending,
     sortInstalled,
-    installing
+    installing,
+    favouriteGamesList
   ])
 
   // we need this to do proper `position: sticky` of the Add Game area

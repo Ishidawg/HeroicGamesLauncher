@@ -2,6 +2,7 @@ import './index.css'
 
 import { useContext, CSSProperties, useMemo, useState, useEffect } from 'react'
 
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRepeat, faBan } from '@fortawesome/free-solid-svg-icons'
 
@@ -455,6 +456,7 @@ const GameCard = ({
               { '--installing-effect': installingGrayscale } as CSSProperties
             }
           >
+            {isFavouriteGame && <FavoriteIcon className="favorite-icon" />}
             <StoreLogos runner={runner} />
             {justPlayed ? (
               <CachedImage

@@ -177,6 +177,20 @@
   fill: var(--text-default);
 }
 
+.gameCard .favorite-icon {
+  border-radius: 10px;
+  position: absolute;
+  right: 50px;
+  top: 4px;
+  z-index: 2;
+  padding: var(--space-3xs);
+  width: 35px;
+  height: 35px;
+  place-content: center;
+  background: var(--background-darker);
+  fill: var(--text-default);
+}
+
 .gameCard:hover,
 .gameCard:focus-within {
   transform: scale(1.05);
